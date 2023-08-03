@@ -1,0 +1,17 @@
+'CodeQ.Blog.Utils:Mixin.Post.CreatedAt':
+  abstract: true
+  properties:
+    createdAt:
+      type: DateTime
+      defaultValue: now
+      ui:
+        label: 'Veröffentlichungsdatum'
+        reloadIfChanged: true
+        inspector:
+          group: document
+          position: 'after uriPathSegment'
+          editorOptions:
+            format: 'd.m.Y'
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {  }
+        Neos.Neos/Validation/DateTimeValidator: {  }

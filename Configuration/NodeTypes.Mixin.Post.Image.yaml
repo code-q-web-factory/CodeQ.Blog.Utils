@@ -1,0 +1,43 @@
+'CodeQ.Blog.Utils:Mixin.Post.Image':
+  abstract: true
+  superTypes:
+    'CodeQ.Site:Mixin.ImageObjectPosition': true
+  ui:
+    inspector:
+      groups:
+        previewImage:
+          label: Anzeige des Vorschau-Bildes
+          icon: image
+          position: 200
+  properties:
+    image:
+      type: Neos\Media\Domain\Model\ImageInterface
+      ui:
+        label: 'Blogpost Bild'
+        reloadIfChanged: true
+        inspector:
+          group: document
+          position: 800
+    imageObjectFit:
+      ui:
+        inspector:
+          group: previewImage
+          position: 100
+      options:
+        preset: 'layout.imageObjectFit'
+    imageHorizontalPosition:
+      ui:
+        label: 'Horizontaler Teaser-Bildausschnitt'
+        help:
+          message: 'Bei 0% ist der ganz linke Teil des Bildes immer zu sehen, bei 100% der ganz rechte.'
+        inspector:
+          group: previewImage
+          position: 200
+    imageVerticalPosition:
+      ui:
+        label: 'Vertikaler Teaser-Bildausschnitt'
+        help:
+          message: 'Bei 0% ist der ganz oben Teil des Bildes immer zu sehen, bei 100% der ganz unten.'
+        inspector:
+          group: previewImage
+          position: 300

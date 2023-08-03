@@ -1,0 +1,10 @@
+##
+# Strip tags, but replace HTML tags with spaces to make it better readable
+##
+prototype(CodeQ.Blog.Utils:Helper.StripTags) < prototype(Neos.Fusion:Value) {
+    # api
+    value = ${value}
+
+    @process.replaceTagsWithSpace = ${String.trim(String.replace(String.replace(String.pregReplace(value, '/<[^>]*>/', ' '), '  ', ' '), '  ', ' '))}
+    @process.replaceZ = ${String.stripTags(value)}
+}

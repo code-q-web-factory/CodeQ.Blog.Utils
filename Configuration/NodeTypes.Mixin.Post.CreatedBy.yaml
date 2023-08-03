@@ -1,0 +1,12 @@
+'CodeQ.Blog.Utils:Mixin.Post.CreatedBy':
+  abstract: true
+  properties:
+    createdBy:
+      type: string
+      ui:
+        label: Autor
+        reloadIfChanged: true
+        inspector:
+          group: document
+          position: after createdAt
+

@@ -1,0 +1,15 @@
+prototype(CodeQ.Blog.Utils:Helper.PostDescription) < prototype(Neos.Fusion:Component) {
+    # api
+    node = ${documentNode}
+    cropAtWord = 197
+
+    # rendering
+    renderer = Neos.Fusion:Value {
+        content = Neos.Neos:ContentCollectionRenderer {
+            items = ${q(props.node).children('main').children()}
+            @process.replace = CodeQ.Blog.Utils:Helper.StripTags
+        }
+        croppedText = ${String.cropAtWord(this.content, props.cropAtWord, '…')}
+        value = ${q(node).property('openGraphDescription') || q(node).property('metaDescription') || this.croppedText}
+    }
+}

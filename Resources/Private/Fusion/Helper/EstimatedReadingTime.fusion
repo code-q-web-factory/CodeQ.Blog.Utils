@@ -1,0 +1,18 @@
+##
+# Estimated reading time based on average of 200 words
+# https://gist.github.com/mynameispj/3170442
+##
+prototype(CodeQ.Blog.Utils:Helper.EstimatedReadingTime) < prototype(Neos.Fusion:Component) {
+    # api
+    node = ${documentNode}
+
+    # rendering
+    renderer = Neos.Fusion:Value {
+        content = Neos.Neos:ContentCollectionRenderer {
+            items = ${q(props.node).children('main').children()}
+            @process.replace = CodeQ.Blog.Utils:Helper.StripTags
+        }
+
+        value = ${Math.max(1, Math.floor(String.wordCount(this.content) / 200))}
+    }
+}
