@@ -5,11 +5,17 @@ prototype(CodeQ.Blog.Utils:Helper.PostDescription) < prototype(Neos.Fusion:Compo
 
     # rendering
     renderer = Neos.Fusion:Value {
-        content = Neos.Neos:ContentCollectionRenderer {
-            items = ${q(props.node).children('main').children()}
-            @process.replace = CodeQ.Blog.Utils:Helper.StripTags
+        properties = Neos.Fusion:DataStructure {
+            openGraphDescription = ${q(props.node).property('openGraphDescription')}
+            metaDescription = ${q(props.node).property('metaDescription')}
+            content = Neos.Neos:ContentCollectionRenderer {
+                @position = 'end 9000'
+                items = ${q(props.node).children('main').children()}
+            }
         }
-        croppedText = ${String.cropAtWord(this.content, props.cropAtWord, '…')}
-        value = ${q(node).property('openGraphDescription') || q(node).property('metaDescription') || this.croppedText}
+
+        value = ${Array.reduce(this.properties, (carry, item) => carry ? carry : item, null)}
+        value.@process.replace = CodeQ.Blog.Utils:Helper.StripTags
+        value.@process.crop = ${String.cropAtWord(value, props.cropAtWord, '…')}
     }
 }
