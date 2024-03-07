@@ -5,6 +5,7 @@ prototype(CodeQ.Blog.Utils:Helper.StripTags) < prototype(Neos.Fusion:Value) {
     # api
     value = ${value}
 
+    @process.removeScriptsAndStyles = ${String.pregReplace(value, '/<script[^>]*?>.*?<\/script>|<style[^>]*?>.*?<\/style>/si', ' ')}
     @process.replaceTagsWithSpace = ${String.trim(String.replace(String.replace(String.pregReplace(value, '/<[^>]*>/', ' '), '  ', ' '), '  ', ' '))}
     @process.replaceZ = ${String.stripTags(value)}
 }
